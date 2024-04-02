@@ -3,15 +3,24 @@ import React from "react";
 import { cn } from "@/utils/cn";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 export default function TokenLauncher() {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log("Form submitted");
+		const formData = new FormData(e.currentTarget); // Use the form element from the event
+    const formValues = Object.fromEntries(formData.entries());
+    console.log("Form submitted with values:", formValues);
+
+    // If you have file inputs and want to handle them specifically
+    const fileInput = formData.get('tokenImage');
+    if (fileInput instanceof File) {
+        console.log("Token Image File Name:", fileInput.name);
+    }
 	};
 
 	return (
-		<div className="max-w-md w-full rounded-none md:rounded-2xl p-4 md:p-8 bg-white dark:bg-black mx-auto relative z-10 overflow-hidden border dark:border-white/[0.2]">
+		<div className="max-w-lg w-full rounded-none md:rounded-2xl p-4 md:p-8 bg-white dark:bg-black mx-auto relative z-10 overflow-hidden border dark:border-white/[0.2]">
 
 			<h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-100">
 				Solana Token Creator
@@ -46,7 +55,7 @@ export default function TokenLauncher() {
 
 					<LabelInputContainer>
 						<Label htmlFor="tokenImage">Token Image</Label>
-						<Input id="tokenImage" type="file" accept="image/*" style={{ width: '100%', height: '120px', color: "#fff" }} />
+						<Input id="tokenImage" type="file" accept="image/*" style={{ width: '100%', height: '122px', color: "#fff" }} />
 					</LabelInputContainer>
 				</div>
 				<LabelInputContainer className="mb-8">
@@ -58,11 +67,21 @@ export default function TokenLauncher() {
 					/>
 				</LabelInputContainer>
 
+				{/* <div className="w-full flex items-center justify-center">
+					<WalletMultiButton
+						style={{
+							backgroundColor: "black",
+							border: "1px solid rgb(255 255 255 / 0.2)",
+							borderRadius: 50,
+						}}
+					/>
+				</div> */}
+
 				<button
 					className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] rounded-full py-3"
 					type="submit"
 				>
-					Select wallet
+					Mint Token
 					<BottomGradient />
 				</button>
 			</form>

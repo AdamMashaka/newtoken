@@ -3,6 +3,7 @@ import React from "react";
 import { IconHome, IconMessage, IconUser } from "@tabler/icons-react";
 import { FloatingNav } from "./ui/floating-navbar";
 import { WalletConnect } from "./WalletConnect";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 export function Nav() {
 	const navItems = [
@@ -49,9 +50,13 @@ export function Nav() {
 			</div>
 
 			<div className="w-1/2 flex justify-end">
-				<button className="px-6 py-2 border relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white rounded-full text-md">
-					Connect Wallet
-				</button>
+				<WalletMultiButton
+					style={{
+						backgroundColor: "black",
+						border: "1px solid rgb(255 255 255 / 0.2)",
+						borderRadius: 50,
+					}}
+				/>
 			</div>
 		</div>
 	);
